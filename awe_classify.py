@@ -3,22 +3,22 @@ import os,math
 from PIL import Image
 
 def circle():
-	s = 50
-	r = 30
-	ima = Image.new('RGBA',(r*2,r*2),(135,135,0,0))
-	imb = Image.new('RGBA',(r*2,r*2),(255,255,255,0))
-	pima = ima.load()
-	pimb = imb.load()
-	c = 25
+	s = 100# size of image
+	r = 40# radius of circle
+	im = Image.new('RGB',(s,s))
+	pim = im.load()
+	c = s/2 # center of circle
 
 	for i in range(s):
 		for j in range(s):
-			lx = abs(i-r)
-			ly = abs(j-r)
+			lx = abs(i-c)
+			ly = abs(j-c)
 			l = ((lx*lx+ly*ly))**0.5
-		if l < r:
-			pimb[i-(s-r),j-(s-r)] = pima[i,j]
-	imb.save('test.png')
+			if l < r:
+				pim[i,j] = (249,205,173)
+			else:
+				pim[i,j] = (255,255,255)
+	im.save('test.png')
 
 if __name__ == '__main__':
 	circle()
