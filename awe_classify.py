@@ -18,8 +18,37 @@ def circle():
 				pim[i,j] = (249,205,173)
 			else:
 				pim[i,j] = (255,255,255)
-	im.save('test.png')
+	im.save('test_cir.png')
+
+def triangle():
+	s = 100
+	im = Image.new('RGB',(s,s))
+	pim = im.load()
+	
+	for i in range(s):
+		for j in range(s):
+			if (i<80) and (i+j>60) and (i-j>60):
+				pim[i,j] = (249,205,173)
+			else:
+				pim[i,j] = (255,255,255)
+	im.save('test_tri.jpg')
+	
+def square():
+	s = 100 # size of image
+	im = Image.new('RGB',(s,s))
+	pim = im.load()
+
+	for i in range(s):
+		for j in range(s):
+			if (i>30) and (i<70) and (j>30) and (j<70):
+				pim[i,j] = (249,205,173)
+			else:
+				pim[i,j] = (255,255,255)
+	im.save('test_squ.jpg')
+	
 
 if __name__ == '__main__':
 	circle()
+	triangle()
+	square()
 
