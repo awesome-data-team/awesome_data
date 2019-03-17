@@ -27,7 +27,7 @@ def triangle():
 	
 	for i in range(s):
 		for j in range(s):
-			if (i<80) and (i+j>60) and (i-j>60):
+			if (j<80) and (i+j>80) and (i-j<20):
 				pim[i,j] = (249,205,173)
 			else:
 				pim[i,j] = (255,255,255)
