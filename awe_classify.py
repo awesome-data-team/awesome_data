@@ -1,6 +1,7 @@
 #coding:utf-8
 import os,math
 from PIL import Image
+import random
 
 def circle():
 	s = 100# size of image
@@ -18,7 +19,7 @@ def circle():
 				pim[i,j] = (249,205,173)
 			else:
 				pim[i,j] = (255,255,255)
-	im.save('test_cir.png')
+	return im
 
 def triangle():
 	s = 100
@@ -31,7 +32,7 @@ def triangle():
 				pim[i,j] = (249,205,173)
 			else:
 				pim[i,j] = (255,255,255)
-	im.save('test_tri.jpg')
+	return im
 	
 def square():
 	s = 100 # size of image
@@ -44,11 +45,46 @@ def square():
 				pim[i,j] = (249,205,173)
 			else:
 				pim[i,j] = (255,255,255)
-	im.save('test_squ.jpg')
+	return im
 	
+def 3_classify():
+	img_size = 224
+	# total 1000 fake images
+	# 1/3 circle, 1/3 square , 1/3  triangle
+	for i in range(1,1001):
+		x = random.randint(0,2)
+		label = x
+		if (1==x):
+			im = square()
+		elif (2==x):
+			im = triangle()
+		else:
+			im = circle
+		rand_temp = random.randint(50,100)
+		size = rand_temp(50,100)/100
+		img = Image.new('RGB',(img_size,img_size))
+		pim = im.load()
+		pimg = img.load()
+		# we define left top point as anchor
+		anchor_x = random.randint(rand_temp,img_size-rand_temp)
+		anchor_y = random.randint(rand_temp,img_size-rand_temp)
+		for j in range(0,img_size):
+			for k in range(0,img_size):
+				x = int((j-anchor_x)/size)
+				y = int((k-anchor_y)/size)
+				z = (random.gauss(0,3),random.gauss(0,3),random.gauss(0,3))
+				if (x<100) and (x>0) and (y<100) and (y>0):
+					pimg[i,j] = pim[x,y]+z
+				else:
+					pimg[i,j] = z
+		img_name = os.path.join(save_path , str(i)+'.jpg')
+		img.save(img_name)
+		with open(txt_name,'a') as f:
+			f.writelines([img_name,' ',label])
+	print('ok')
+			
+				
+					
 
 if __name__ == '__main__':
-	circle()
-	triangle()
-	square()
-
+	3_classify()
