@@ -2,6 +2,7 @@
 import os,math
 from PIL import Image
 import random
+from utils import ShowBar
 
 def circle():
 	s = 100# size of image
@@ -58,6 +59,7 @@ def gen_classify():
 	img_size = 224
 	# total 1000 fake images
 	# 1/3 circle, 1/3 square , 1/3  triangle
+	process_bar = ShowBar()
 	for i in range(1,1001):
 		x = random.randint(0,2)
 		label = x
@@ -82,14 +84,14 @@ def gen_classify():
 				z = (int(random.gauss(0,3)),int(random.gauss(0,3)),int(random.gauss(0,3)))
 				if (x<100) and (x>0) and (y<100) and (y>0):
 					zz = pim[x,y]
-					pimg[i,j] = (zz[0]+z[0],zz[1]+z[1],zz[2]+z[2])
+					pimg[j,k] = (zz[0]+z[0],zz[1]+z[1],zz[2]+z[2])
 				else:
-					pimg[i,j] = z
+					pimg[j,k] = z
 		img_name = os.path.join(save_path , str(i)+'.jpg')
 		img.save(img_name)
 		with open(txt_name,'a') as f:
 			f.writelines(img_name+' '+str(label)+'\n')
-	print('ok')
+		process_bar.show_process(i/1000)
 			
 				
 					
