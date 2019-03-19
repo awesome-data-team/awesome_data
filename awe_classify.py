@@ -47,9 +47,14 @@ def square():
 				pim[i,j] = (255,255,255)
 	return im
 	
-def 3_classify():
+def gen_classify():
 	save_path = 'images'
-	txt_name = 'label.txt
+	if os.path.exists(save_path):
+		print(save_path,' already exist')
+		raise(ValueError)
+	else:
+		os.mkdir(save_path)
+	txt_name = 'label.txt'
 	img_size = 224
 	# total 1000 fake images
 	# 1/3 circle, 1/3 square , 1/3  triangle
@@ -61,9 +66,9 @@ def 3_classify():
 		elif (2==x):
 			im = triangle()
 		else:
-			im = circle
+			im = circle()
 		rand_temp = random.randint(50,100)
-		size = rand_temp(50,100)/100
+		size = rand_temp/100
 		img = Image.new('RGB',(img_size,img_size))
 		pim = im.load()
 		pimg = img.load()
@@ -74,19 +79,20 @@ def 3_classify():
 			for k in range(0,img_size):
 				x = int((j-anchor_x)/size)
 				y = int((k-anchor_y)/size)
-				z = (random.gauss(0,3),random.gauss(0,3),random.gauss(0,3))
+				z = (int(random.gauss(0,3)),int(random.gauss(0,3)),int(random.gauss(0,3)))
 				if (x<100) and (x>0) and (y<100) and (y>0):
-					pimg[i,j] = pim[x,y]+z
+					zz = pim[x,y]
+					pimg[i,j] = (zz[0]+z[0],zz[1]+z[1],zz[2]+z[2])
 				else:
 					pimg[i,j] = z
 		img_name = os.path.join(save_path , str(i)+'.jpg')
 		img.save(img_name)
 		with open(txt_name,'a') as f:
-			f.writelines([img_name,' ',label])
+			f.writelines(img_name+' '+str(label)+'\n')
 	print('ok')
 			
 				
 					
 
 if __name__ == '__main__':
-	3_classify()
+	gen_classify()
