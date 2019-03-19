@@ -48,6 +48,8 @@ def square():
 	return im
 	
 def 3_classify():
+	save_path = 'images'
+	txt_name = 'label.txt
 	img_size = 224
 	# total 1000 fake images
 	# 1/3 circle, 1/3 square , 1/3  triangle
