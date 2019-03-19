@@ -19,7 +19,7 @@ def circle():
 			if l < r:
 				pim[i,j] = (249,205,173)
 			else:
-				pim[i,j] = (255,255,255)
+				pim[i,j] = (128,128,128)
 	return im
 
 def triangle():
@@ -32,7 +32,7 @@ def triangle():
 			if (j<80) and (i+j>80) and (i-j<20):
 				pim[i,j] = (249,205,173)
 			else:
-				pim[i,j] = (255,255,255)
+				pim[i,j] = (128,128,128)
 	return im
 	
 def square():
@@ -45,7 +45,7 @@ def square():
 			if (i>30) and (i<70) and (j>30) and (j<70):
 				pim[i,j] = (249,205,173)
 			else:
-				pim[i,j] = (255,255,255)
+				pim[i,j] = (128,128,128)
 	return im
 	
 def gen_classify():
@@ -86,7 +86,7 @@ def gen_classify():
 					zz = pim[x,y]
 					pimg[j,k] = (zz[0]+z[0],zz[1]+z[1],zz[2]+z[2])
 				else:
-					pimg[j,k] = z
+					pimg[j,k] = (128+z[0],128+z[1],128+z[2])
 		img_name = os.path.join(save_path , str(i)+'.jpg')
 		img.save(img_name)
 		with open(txt_name,'a') as f:
