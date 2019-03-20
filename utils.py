@@ -8,7 +8,7 @@ class ShowBar():
 		self.infoDone = infoDone
 
 	def show_process(self,perc):
-		self.i = int(self.i*perc)
+		self.i = int(self.max_num*perc)
 		process_bar = '['+'>'*self.i+'-'*(self.max_num-self.i)+']'+'\r'
 		sys.stdout.write(process_bar)
 		sys.stdout.flush()
