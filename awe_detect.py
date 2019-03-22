@@ -2,6 +2,7 @@
 import os,math
 from PIL import Image
 import random
+import xml.etree.ElementTree as ET
 from utils import ShowBar,mkdir
 
 def circle():
@@ -48,10 +49,13 @@ def square():
 				pim[i,j] = (128,128,128)
 	return im
 	
-def gen_classify():
+def gen_detect():
 	save_path = 'images'
-	mkdir(save_path)
-	txt_name = 'label.txt'
+	jpg_path = 'jpegs'
+	xml_path = 'Annotations'
+	mkdir(jpg_path)
+	mkdir(xml_path)
+
 	img_size = 224
 	# total 1000 fake images
 	# 1/3 circle, 1/3 square , 1/3  triangle

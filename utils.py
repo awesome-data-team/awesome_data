@@ -1,4 +1,5 @@
 import sys,time
+import os
 
 class ShowBar():
 	"show the rate of progress"
@@ -17,3 +18,12 @@ class ShowBar():
 		print('')
 		print(self.infoDone)
 		self.i = 0
+
+class NameError(RuntimeError):
+	def __init__(self,*arg):
+		self.args = arg
+
+def mkdir(name):
+	if os.path.exists(name):
+		raise NameError(name+' already exist!')
+	else:	os.mkdir(name)
